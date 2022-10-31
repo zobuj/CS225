@@ -15,3 +15,4 @@ class DisjointSets{
     vector<int> allNodes;//stores every node seen in the tree including the representative nodes
     int numTrees;
 };
+
