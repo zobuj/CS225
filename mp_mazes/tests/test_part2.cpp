@@ -44,19 +44,19 @@ void recDFS(SquareMaze & maze, vector<vector<uint8_t> > * visited, int x, int y,
         (*visited)[x][y] = 1;
 
         if (x < width-1 && maze.canTravel(x, y, 0)){
-            cout<<"TEST0"<<endl;
+           // cout<<"TEST0"<<endl;
             s.push(make_pair(x+1, y));
         }   
         if (y < height-1 && maze.canTravel(x, y, 1)){
-            cout<<"TEST1"<<endl;
+            //cout<<"TEST1"<<endl;
             s.push(make_pair(x, y+1));
         }
         if (x > 0 && maze.canTravel(x, y, 2)){
-            cout<<"TEST2"<<endl;
+            //cout<<"TEST2"<<endl;
             s.push(make_pair(x-1, y));
         }
         if (y > 0 && maze.canTravel(x, y, 3)){
-            cout<<"TEST3"<<endl;
+           // cout<<"TEST3"<<endl;
             s.push(make_pair(x, y-1));
         }
     }
@@ -107,8 +107,8 @@ void assert_maze_tree(SquareMaze & maze, int width, int height)
     pair<int, int> checks = assert_maze_helper(maze, width, height);
     int components = checks.first;
     int calls = checks.second;
-    cout<<"Calls: "<<calls<<endl;
-    cout<<"Components: "<<components<<endl; 
+    //cout<<"Calls: "<<calls<<endl;
+    //cout<<"Components: "<<components<<endl; 
     if (calls + components != width * height * 2)
         FAIL("Maze has a cycle");
     if (components != 1)
@@ -166,7 +166,7 @@ TEST_CASE("testMakeSmallMaze", "[weight=10][part2][personal]")
     assert_maze_tree(maze, 2, 2);
 }
 
-TEST_CASE("testMakeMazeConnected", "[weight=10][part2]")
+TEST_CASE("testMakeMazeConnected", "[weight=10][part2][p2]")
 {
     SquareMaze maze;
     maze.makeMaze(15, 15);
@@ -217,7 +217,7 @@ TEST_CASE("testMakeMazeRandom", "[weight=10][part2]")
         FAIL("Generated the same 50x50 maze twice");
 }
 
-TEST_CASE("testSolveMazeValidPath", "[weight=10][part2]")
+TEST_CASE("testSolveMazeValidPath", "[weight=10][x8][part2]")
 {
     SquareMaze maze;
     MazeReader soln = READ_SOLUTION_MAZE("testSolveMazeValidPath", 15, 15);
@@ -237,7 +237,7 @@ TEST_CASE("testSolveMazeValidPath", "[weight=10][part2]")
     }
 }
 
-TEST_CASE("testSolutionBottomRow", "[weight=10][part2]")
+TEST_CASE("testSolutionBottomRow", "[weight=10][x][part2]")
 {
     SquareMaze maze;
     MazeReader soln = READ_SOLUTION_MAZE("testSolutionBottomRow",15, 15);
@@ -253,7 +253,7 @@ TEST_CASE("testSolutionBottomRow", "[weight=10][part2]")
         FAIL("Didn't end up at the bottom row");
 }
 
-TEST_CASE("testSolutionCorrectSquare", "[weight=10][part2]")
+TEST_CASE("testSolutionCorrectSquare", "[weight=10][x5][part2]")
 {
     SquareMaze maze;
     MazeReader soln = READ_SOLUTION_MAZE("testSolutionCorrectSquare",15, 15);
@@ -291,16 +291,16 @@ void helpSolveMaze(const MazeReader & soln)
             FAIL("Solution is incorrect");
 }
 
-TEST_CASE("testSolveMazeSmall", "[weight=10][part2][timeout=20000]") {
+TEST_CASE("testSolveMazeSmall", "[weight=10][part2][x2][timeout=20000]") {
     helpSolveMaze(READ_SOLUTION_MAZE("testSolveMazeSmall", 70, 70));
 }
 
-TEST_CASE("testSolveMazeLarge", "[weight=10][part2][timeout=30000]") {
+TEST_CASE("testSolveMazeLarge", "[weight=10][part2][x3][timeout=30000]") {
     helpSolveMaze(READ_SOLUTION_MAZE("testSolveMazeLarge", 140, 140));
 }
 
 
-TEST_CASE("testDrawMazeSmall", "[weight=10][part2]")
+TEST_CASE("testDrawMazeSmall", "[weight=10][p][part2]")
 {
     PNG solnImage = READ_UNSOLVED_PNG("testDrawMazeSmall", 2, 2);
     MazeReader soln(solnImage);
@@ -312,7 +312,7 @@ TEST_CASE("testDrawMazeSmall", "[weight=10][part2]")
     delete actualOutput;
 }
 
-TEST_CASE("testDrawMazeMed", "[weight=10][part2]")
+TEST_CASE("testDrawMazeMed", "[weight=10][p][part2]")
 {
     PNG solnImage = READ_UNSOLVED_PNG("testDrawMazeMed", 50, 50);
     MazeReader soln(solnImage);
@@ -323,7 +323,7 @@ TEST_CASE("testDrawMazeMed", "[weight=10][part2]")
     delete actualOutput;
 }
 
-TEST_CASE("testDrawMazeLarge", "[weight=10][part2][timeout=30000]")
+TEST_CASE("testDrawMazeLarge", "[weight=10][part2][p][timeout=30000]")
 {
     PNG solnImage = READ_UNSOLVED_PNG("testDrawMazeLarge", 200, 200);
     MazeReader soln(solnImage);

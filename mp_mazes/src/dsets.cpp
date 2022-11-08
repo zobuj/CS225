@@ -106,29 +106,28 @@ void DisjointSets::setunion(int a, int b){
     a - index of the first element to union
     b - index of the second element to union 
     */
-    int rootA = find(a);//find the representative node for element a
-    int rootB = find(b);//finds the representative node for element b
-    if((-1*allNodes[rootA])>(-1*allNodes[rootB])){
-        /*if rootA has more nodes then we are going to replace the value at the
-        index for rootB to be a pointer to rootA, then we are going to update the
-        value at the index of rootA beacuse we added the points from rootb.
-        Thus we store the values from rootb and then just add them to the value 
-        at rootA
+    if((-1*allNodes[find(a)])>(-1*allNodes[find(b)])){
+        /*if a's tree has more nodes then we are going to replace the value at the
+        index for b's tree to be a pointer to a's tree, then we are going to update the
+        value at the index of a's tree beacuse we added the points from b's tree.
+        Thus we store the values from b's tree and then just add them to the value 
+        at a's tree
         */
-        int tempBSize = allNodes[rootB];
-        allNodes[rootB]=rootA;
-        allNodes[rootA]+=tempBSize;
+        int tempBSize = allNodes[find(b)];
+        allNodes[find(b)]=find(a);
+        allNodes[find(a)]+=tempBSize;
     }else{
         //we do the same as above but reverse
-        int tempASize = allNodes[rootA];
-        allNodes[rootA]=rootB;
-        allNodes[rootB]+=tempASize;
+        int tempASize = allNodes[find(a)];
+        allNodes[find(a)]=find(b);
+        allNodes[find(b)]+=tempASize;
     }
 }
 
 int DisjointSets::size(int elem){
     //This function should return the number of nodes in the up-tree containing the element
     //Returns: number of nodes in the up-tree containing the element
+
     int index = find(elem);//finds the representative node for the element
     int result = allNodes[index]*-1;//then the negated value at the index of the representative node is the number of nodes in the tree
     return result;//then we just return that number of nodes
